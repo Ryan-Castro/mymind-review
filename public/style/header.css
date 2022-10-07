@@ -1,0 +1,17 @@
+.header>.menu{    
+    width: 100vw;
+    background-color: #242526;
+    padding: 10px 60px;
+}
+.header>.menu>span{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    right: 0px;
+
+}
+.header>hr{
+    background-color: rgb(51, 51, 51);
+    height: 1px;
+    border: 0px;
+}
