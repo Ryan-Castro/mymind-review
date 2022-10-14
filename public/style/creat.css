@@ -3,13 +3,10 @@
     height: 100vh;
     background: white;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #creatContainer{
     width: 800px;
-}
-
-.jodit-status-bar__item>span{
-    color: black;
 }

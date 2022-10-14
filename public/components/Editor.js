@@ -4,7 +4,7 @@ const JoditEditor = dynamic(() => import('jodit-react'), {
 	ssr: false
 })
 
-export default function Editor(){
+export default function Editor(props){
 	const editor = useRef(null);
 	const [content, setContent] = useState('');
 
@@ -12,14 +12,19 @@ export default function Editor(){
 			readonly: false, // all options from https://xdsoft.net/jodit/doc/,
 			heigth: 400,
 		}
+
 	return (
 		<JoditEditor
 			ref={editor}
 			value={content}
 			config={config}
 			tabIndex={1} // tabIndex of textarea
-			onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-			onChange={newContent => {}}
+			onBlur={newContent => 
+				{
+					props.handleState(newContent)
+				}
+			}
+			onChange = {newContent => {}}
 		/>
 	);
 };
