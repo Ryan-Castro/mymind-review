@@ -21,7 +21,8 @@ export default function Editor(props){
 			tabIndex={1} // tabIndex of textarea
 			onBlur={newContent => 
 				{
-					props.handleState(newContent)
+					console.log(newContent.split(' '))
+					//props.handleState(newContent)
 				}
 			}
 			onChange = {newContent => {}}
