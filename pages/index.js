@@ -1,10 +1,10 @@
-import { useEffect, useState }                                                  from "react";
-import Head                                                                     from "next/head";
-import Header                                                                   from "../public/components/Header";
-import NavBar                                                                   from '../public/components/NavBar';
-import Card                                                                     from "../public/components/card";
-import { getFirestore, collection, getDocs }                                    from "firebase/firestore";
-import {  initializeApp }                                                       from "firebase/app";
+import { useEffect, useState }               from "react";
+import Head                                  from "next/head";
+import Header                                from "../public/components/Header";
+import NavBar                                from '../public/components/NavBar';
+import Card                                  from "../public/components/card";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {  initializeApp }                    from "firebase/app";
 
 
 
@@ -24,7 +24,7 @@ export default function home(){
     const   db                  =                                     getFirestore(app);
     let     [cards, setCards]   =                                     useState([])
     let itens = []
-    
+    let [barNumType, setBarNumType] = useState("livros")
     
     function show(){
         if(navBar == "flex" ){
@@ -34,24 +34,24 @@ export default function home(){
         }
     } 
 
-    async function init(){
-        await getDocs(collection(db, "livros"))
-                            .then((snapshot)=>{
-                                snapshot.docs.map((doc, i)=>{
-                                            itens.push([
-                                            doc.id,
-                                            doc.data().resumo,
-                                            doc.data().text,
-                                            i
-                                            ]) 
-                                        })
-                                    })
-        setCards(itens)
-        console.log(itens)
+    async function init(type){
+        if(type != "manhwa"){
+             
+            type = type.target.id
+            setBarNumType(type)
+            
+        }
+    await getDocs(collection(db, type))
+            .then((snapshot)=>{
+                snapshot.docs.map((doc, i)=>{
+                            itens.push([ doc.id, doc.data().resumo, doc.data().text, i, doc.data().numType ]) 
+                        })
+                    })
+        setCards(itens) 
     }
 
     useEffect(()=>{
-        init()
+        init("manhwa")
     },[])
 
     return(
@@ -60,9 +60,9 @@ export default function home(){
                 <title>mymind-review</title>
             </Head>
             <Header show={show}></Header>
-            <NavBar navBar={navBar}></NavBar>
+            <NavBar navBar={navBar} handleUpdate={init} barNum={barNumType}></NavBar>
             <div className="content">
-                {cards.map(card=><Card key={card[3]} h1={card[0]} resumo={card[1]}></Card>)}
+                {cards.map(card=><Card key={card[3]} h1={card[0]} resumo={card[1]} numType={card[4]}></Card>)}
                 
 
             </div>

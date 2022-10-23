@@ -1,10 +1,12 @@
 import Editor                                               from "../public/components/Editor"
 import { initializeApp }                                    from "firebase/app";
-import { getFirestore, setDoc, doc }                        from "firebase/firestore";
-import { useState }                                         from "react";
+import { getFirestore, setDoc, doc, getDoc}                        from "firebase/firestore";
+import { useEffect, useState }                                         from "react";
 import React                                                from 'react'
 import dynamic                                              from 'next/dynamic';
 import Link                                                 from "next/link";
+import { useRouter} from 'next/router'
+
 
 
 const Select =                                              dynamic(() => import('react-select'), {
@@ -25,47 +27,79 @@ export default function Creat(){
         measurementId:                                      "G-3G8E71P1X5"
     };
 
+    const  {query}  = useRouter()
     const app   =                                           initializeApp(firebaseConfig);
     const db    =                                           getFirestore(app);
-    let titulo = ""
+    const [title, setTitle] = useState("")
     const [resumo, setResumo] =                             useState("") 
     const [text, setText] =                                 useState("") 
-    const [selected, setSelected] =                         useState("")
+    const [selected, setSelected] =                         useState([])
     const [genres, setGenres] =                             useState([])
-    
+    const [defGenres, setDefGenres] =                       useState([])
+    const [numGenresArrey, setNumArrey] = useState([])
 
-    async function enviar(){
-        let selTarg = selected.target
-        let optSel = selTarg.options[selTarg.selectedIndex].value
-        if (optSel == "" || titulo == ""){
+
+    useEffect(()=>{
+        if(query.id){
+            setTitle(query.id)
+            setSelected(optionsTypes[query.numType])
+            setNumArrey(query.numGenres.split(","))
+            
+        }
+    },[query])
+
+
+
+        
+    async function breakGenres(genresArrey){
+        let itemArray = []
+        let numGenre = []
+        await genresArrey.map(genre=>{
+            itemArray.push(genre)  
+            numGenre.push(genre.numGenre)
+        })
+        setGenres(itemArray)
+        setDefGenres(numGenre)
+    }      
+
+
+  async function enviar(){
+        let numType = selected.numType
+        if (numType == "" || title == ""  || resumo == "" || text == ""  || genres == ""){
             alert("Reveja os dados cadastrados")
         } else {
-            await setDoc(doc(db, optSel, titulo),{
+            console.log()
+            await setDoc(doc(db, selected.value, title),{
                 resumo,
                 text,
-                genres
+                genres,
+                numType,
+                defGenres
             }) 
         }
     }
 
-    const options = [
-        { value: 'Ação', label: 'Ação' },
-        { value: 'Romance', label: 'Romance' },
-        { value: 'Comédia', label: 'Comédia' }
-      ]
 
-    async function breakGenres(genresArrey){
-        let itemArray = []
-        await genresArrey.map(genre=>{
-            itemArray.push(genre.value)  
-            
-        })
-        setGenres(itemArray)
-    }
+    const optionsGenres = [
+        {value: 'Ação', label: 'Ação', numGenre: 0},
+        {value: 'Romance', label: 'Romance', numGenre: 1},
+        {value: 'Comédia', label: 'Comédia', numGenre: 2}
+    ]
+
+
+    const optionsTypes = [
+        { value: 'livros', label: 'livros', numType:0},
+        { value: 'manhwa', label: 'manhwa', numType:1},
+        { value: 'filmes', label: 'filmes', numType:2},
+        { value: 'musicas', label: 'musicas', numType:3},
+    ]
+
+
+
 
     return(
         <div id="creat">            
-            <div className="bar">
+            <div id="barCreate">
                 
                 <button>
                     <Link href="/admin">
@@ -73,17 +107,20 @@ export default function Creat(){
                     </Link>
                 </button>
 
-
-                <select onInput={(r) =>{setSelected(r)}} id="itens">
-                    <option value="">Escolha um Conteudo</option>
-                    <option value="livros">livros</option>
-                    <option value="manhwa">manhwa</option>
-                </select>
-                
                 <Select 
+                    defaultValue={[optionsTypes[query.numType]]}
+                    options={optionsTypes}
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                    onChange={(b)=>{setSelected(b)}}
+                    id="tipes"
+                    />
+
+                <Select 
+                    defaultValue={numGenresArrey.map(num=>{return optionsGenres[num]})}
                     isMulti
                     name="colors"
-                    options={options}
+                    options={optionsGenres}
                     className="basic-multi-select"
                     classNamePrefix="select"
                     onChange={(a)=>{breakGenres(a)}}
@@ -95,13 +132,11 @@ export default function Creat(){
 
             <div id="creatContainer">
                 <h1>Título</h1>
-                <input type='text' id="inputTitulo" onInput={(e)=>{  titulo = e.target.value
-                                                                console.log(titulo)
-                                                                }} />
+                <input type='text' id="inputTitulo" onBlur={(e)=>{setTitle(e.target.value)}} value={title} onChange={t=>{console.log(t.target.value)}} />
                 <h1>Sinopse / Resumo</h1>
-                <Editor handleState={setResumo}></Editor>
-                <h1>Option</h1>
-                <Editor handleState={setText}></Editor>
+                <Editor handleState={setResumo} id={query.id} type={selected} input="resumo"></Editor>
+                <h1>Texto</h1>
+                <Editor handleState={setText} id={query.id} type={selected}></Editor>
             </div>
 
         </div>

@@ -1,11 +1,11 @@
 import React from "react";
 
-export default function Card(props){
+export default function CardEdit(props){
     return(
         <div className="card">
             <h1>{props.h1}</h1>
             <p dangerouslySetInnerHTML={{__html: props.resumo}}></p>
-            <a href={`./reading?id=`+props.h1+"&type="+props.numType}>click aqui pra ler mais</a>
+            <a href={`./creat?id=`+props.h1+"&numType="+props.numType+"&numGenres="+props.numGenres}>click aqui para Editar</a>
         </div>
 
     )

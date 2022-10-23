@@ -10,3 +10,9 @@
 #creatContainer{
     width: 800px;
 }
+
+#barCreate{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
