@@ -32,10 +32,14 @@ export default function reading(){
     async function init(path){
         if(path.id){
         const docRef = doc(db, `${optionsTypes[path.type].value}`, `${path.id}`); 
-        console.log(path)
         getDoc(docRef)
             .then(res=>{
-                setDocSnap(res.data())});
+                if(res.data()){
+                setDocSnap(res.data());
+            } else {
+                alert("Não encontrado")
+            }
+        })
             
     }
     }
@@ -45,9 +49,19 @@ export default function reading(){
     useEffect(()=>{
         init(query)
     },[query])
+
+
     return(
-        <div>
-            <p dangerouslySetInnerHTML={{__html: docSnap.text}}></p>
+        <div id='reading'>
+            <h1 dangerouslySetInnerHTML={{__html: query.id}}></h1>
+            <div>
+                <h2>Sinopse</h2>
+                <p dangerouslySetInnerHTML={{__html: docSnap.resumo}}></p>
+            </div>
+            <div>
+                <h2>Análise</h2>
+                <p dangerouslySetInnerHTML={{__html: docSnap.text}}></p>
+            </div>
         </div>
         
 )}

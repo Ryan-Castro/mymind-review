@@ -13,3 +13,15 @@
     height: 10vh;
     border-bottom: 1px solid black;
 }
+
+#contentEdit{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    grid-gap: 10px;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 100px;
+    background-color: rgba(66, 183, 53, 0.35);
+    overflow: auto;
+}

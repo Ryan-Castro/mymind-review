@@ -61,7 +61,7 @@ export default function admin(){
     return(
         <div id="admin">
             <div id="navbarAdmin">
-                <button>
+                <button className="btnAdmin">
                     <Link href="/">
                         <a>Pagina Inicial</a>
                     </Link>
@@ -70,14 +70,17 @@ export default function admin(){
                     options={options}
                     onChange={(a)=>{update(a.value)}}
                     id="classes"
+                    className="selectCustom"
                     />
-                <button>
+                <button className="btnAdmin">
                     <Link href="/creat">
                         <a>Criar Resumo</a>
                     </Link>
                 </button>
             </div>
-            {cardsEdit.map(card=><CardEditor key={card[3]} h1={card[0]} resumo={card[1]} numType={card[4]} numGenres={card[5]}></CardEditor>)}
+            <div id="contentEdit">
+                {cardsEdit.map(card=><CardEditor key={card[3]} h1={card[0]} resumo={card[1]} numType={card[4]} numGenres={card[5]}></CardEditor>)}
+            </div>
             </div>
     )
 }

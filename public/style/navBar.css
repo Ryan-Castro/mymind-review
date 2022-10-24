@@ -4,20 +4,20 @@
     border-radius: 0px 10px 10px 0px;
     display: flex;
     flex-direction: column;
+    text-shadow: 1px 1px 0px black;
+    font-size: 20px;
 }
 
 .navbar>ul{
     display: flex;
     flex-direction: column;
-    max-width: 150px;
+    max-width: 100px;
     position: relative;
     list-style: none;
-    padding-top: 20px;
     background-color: #1d1e1f;
     height: calc(100vh - 48px);
-    border-right: 1px solid black;
 }
 
 .navbar>ul>li{
-    margin: 15px 20px;
+    padding: 15px 20px;
 }

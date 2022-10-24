@@ -1,4 +1,4 @@
-import { useEffect, useState }               from "react";
+import { useEffect, useState, useRef }       from "react";
 import Head                                  from "next/head";
 import Header                                from "../public/components/Header";
 import NavBar                                from '../public/components/NavBar';
@@ -26,16 +26,20 @@ export default function home(){
     let itens = []
     let [barNumType, setBarNumType] = useState("livros")
     
+    let contentElement = useRef()
+
     function show(){
         if(navBar == "flex" ){
+            contentElement.current.style.width = "100%"
             setnavBar("none")
         } else {
             setnavBar("flex")
+            contentElement.current.style.width = "calc(100% - 100px)"
         }
     } 
 
     async function init(type){
-        if(type != "manhwa"){
+        if(type != "livros"){
              
             type = type.target.id
             setBarNumType(type)
@@ -51,17 +55,17 @@ export default function home(){
     }
 
     useEffect(()=>{
-        init("manhwa")
+        init("livros")
     },[])
 
     return(
-        <div>
+        <div id="main">
             <Head>
                 <title>mymind-review</title>
             </Head>
             <Header show={show}></Header>
             <NavBar navBar={navBar} handleUpdate={init} barNum={barNumType}></NavBar>
-            <div className="content">
+            <div className="content" ref={contentElement}>
                 {cards.map(card=><Card key={card[3]} h1={card[0]} resumo={card[1]} numType={card[4]}></Card>)}
                 
 

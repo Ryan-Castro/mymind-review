@@ -2,16 +2,43 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box; 
-    
 }
 
 body{
     display: flex;
+    
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
 }
-
+#main{
+    height: 100%;
+    background-color: rgb(32, 32, 32);
+}
 .content{
+    box-sizing: border-box;
+    width: calc(100% - 100px);
+    height: 100%;
     display: grid;
+    justify-items: center;
     grid-template-columns: 1fr 1fr;
     padding: 20px;
+    padding-bottom: 70px;
     grid-gap: 20px;
+    overflow: auto;
+}
+
+.selectCustom{
+    width: 500px;
+}
+
+.btnAdmin{
+    padding: 10px;
+    border-radius: 50px;
+    border: 1px solid black;
+}
+
+.btnAdmin a{
+    color: black;
+    text-decoration: none;
 }

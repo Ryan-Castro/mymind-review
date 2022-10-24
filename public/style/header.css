@@ -1,7 +1,9 @@
+
 .header>.menu{    
     width: 100vw;
     background-color: #242526;
     padding: 10px 60px;
+    color: white;
 }
 .header>.menu>span{
     position: absolute;

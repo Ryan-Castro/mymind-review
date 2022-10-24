@@ -5,7 +5,7 @@ export default function CardEdit(props){
         <div className="card">
             <h1>{props.h1}</h1>
             <p dangerouslySetInnerHTML={{__html: props.resumo}}></p>
-            <a href={`./creat?id=`+props.h1+"&numType="+props.numType+"&numGenres="+props.numGenres}>click aqui para Editar</a>
+            <a href={`./creat?id=`+props.h1+"&numType="+props.numType+"&numGenres="+props.numGenres}>Editar</a>
         </div>
 
     )

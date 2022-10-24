@@ -101,16 +101,16 @@ export default function Creat(){
         <div id="creat">            
             <div id="barCreate">
                 
-                <button>
+                <button className="btnAdmin">
                     <Link href="/admin">
-                        <a>voltar</a>
+                        <a>Admin</a>
                     </Link>
                 </button>
 
                 <Select 
                     defaultValue={[optionsTypes[query.numType]]}
                     options={optionsTypes}
-                    className="basic-multi-select"
+                    className="basic-multi-select selectCustom"
                     classNamePrefix="select"
                     onChange={(b)=>{setSelected(b)}}
                     id="tipes"
@@ -121,22 +121,22 @@ export default function Creat(){
                     isMulti
                     name="colors"
                     options={optionsGenres}
-                    className="basic-multi-select"
+                    className="basic-multi-select selectCustom"
                     classNamePrefix="select"
                     onChange={(a)=>{breakGenres(a)}}
                     id="genres"
                     />
                 
-                <input type="button" value="Enviar" onClick={enviar}/>
+                <input type="button" value="Enviar" onClick={enviar} className="btnAdmin"/>
             </div>
 
             <div id="creatContainer">
-                <h1>Título</h1>
-                <input type='text' id="inputTitulo" onBlur={(e)=>{setTitle(e.target.value)}} value={title} onChange={t=>{console.log(t.target.value)}} />
-                <h1>Sinopse / Resumo</h1>
-                <Editor handleState={setResumo} id={query.id} type={selected} input="resumo"></Editor>
-                <h1>Texto</h1>
-                <Editor handleState={setText} id={query.id} type={selected}></Editor>
+                    <h1>Título</h1>
+                    <input type='text' id="inputTitulo" onChange={(e)=>{setTitle(e.target.value)}} value={title} />
+                    <h1>Sinopse / Resumo</h1>
+                    <Editor handleState={setResumo} id={query.id} type={selected} input="resumo"></Editor>
+                    <h1>Texto</h1>
+                    <Editor handleState={setText} id={query.id} type={selected}></Editor>
             </div>
 
         </div>
