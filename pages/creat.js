@@ -5,7 +5,8 @@ import { useEffect, useState }                                         from "rea
 import React                                                from 'react'
 import dynamic                                              from 'next/dynamic';
 import Link                                                 from "next/link";
-import { useRouter} from 'next/router'
+
+import Router, {useRouter} from 'next/router'
 
 
 
@@ -44,11 +45,9 @@ export default function Creat(){
             setTitle(query.id)
             setSelected(optionsTypes[query.numType])
             setNumArrey(query.numGenres.split(","))
-            
+            breakGenres(numGenresArrey.map(num=> optionsGenres[num]))
         }
     },[query])
-
-
 
         
     async function breakGenres(genresArrey){
@@ -64,18 +63,24 @@ export default function Creat(){
 
 
   async function enviar(){
-        let numType = selected.numType
-        if (numType == "" || title == ""  || resumo == "" || text == ""  || genres == ""){
+        let numType = selected.numType  
+        let genresitems = numGenresArrey.map(num=>{return optionsGenres[num]})
+        console.log(numType)
+        console.log(title)
+        console.log(resumo)
+        console.log(text)
+        if ((numType == "" && numType != 0) || title == ""  || resumo == "" || text == "" ){
             alert("Reveja os dados cadastrados")
         } else {
-            console.log()
+          
             await setDoc(doc(db, selected.value, title),{
                 resumo,
                 text,
-                genres,
+                genres: genres !="" ? genres : genresitems,
                 numType,
                 defGenres
-            }) 
+            }).then(()=>{Router.push('/admin')}) 
+
         }
     }
 
@@ -94,7 +99,9 @@ export default function Creat(){
         { value: 'musicas', label: 'musicas', numType:3},
     ]
 
-
+    function setInputText(e){
+        setTitle(e.target.value)
+    }
 
 
     return(
@@ -132,11 +139,11 @@ export default function Creat(){
 
             <div id="creatContainer">
                     <h1>Título</h1>
-                    <input type='text' id="inputTitulo" onChange={(e)=>{setTitle(e.target.value)}} value={title} />
+                    <input type='text' id="inputTitulo" onChange={(e)=>{setInputText(e)}} value={title} />
                     <h1>Sinopse / Resumo</h1>
-                    <Editor handleState={setResumo} id={query.id} type={selected} input="resumo"></Editor>
+                    <Editor handleState={setResumo} id={query.id} type={optionsTypes} input="resumo"></Editor>
                     <h1>Texto</h1>
-                    <Editor handleState={setText} id={query.id} type={selected}></Editor>
+                    <Editor handleState={setText} id={query.id} type={optionsTypes}></Editor>
             </div>
 
         </div>

@@ -34,7 +34,6 @@ export default function admin(){
       ]
     
     async function update(genre){
-        console.log(genre)
         await getDocs(collection(db, genre))
                             .then((snapshot)=>{
                                 snapshot.docs.map((doc, i)=>{

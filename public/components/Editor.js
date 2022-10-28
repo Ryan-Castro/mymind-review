@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } 						from 'react';
 import { initializeApp }                                    		from "firebase/app";
-import { getFirestore, setDoc, doc, getDoc}                        	from "firebase/firestore";
+import { getFirestore, setDoc, doc, getDoc, queryEqual}                        	from "firebase/firestore";
 import dynamic from 'next/dynamic';
+import { useRouter} from 'next/router'
 const JoditEditor = dynamic(() => import('jodit-react'), {
 	ssr: false
 })
@@ -20,28 +21,27 @@ export default function Editor(props){
 	const [content, setContent] = useState('');
 	const app   =                                           initializeApp(firebaseConfig);
     const db    =                                           getFirestore(app);
-
+	const  {query}  = useRouter()
 	const config = {
 			readonly: false,
 			heigth: 400,
 		}
 
 	useEffect(()=>{
-		if(props.type != ""){
-			console.log(props.type.value)
-			load(props.id, props.type.value)
+		if(query.numType && props.type[query.numType]){
+			load(props.id, props.type[query.numType].value)
 		}
-	},[props.type])
+	},[query])
 
 	async function load(linkId, linkGenre){
         const docRef = doc(db, `${linkGenre}`, `${linkId}`);
         let itemInput = ""
         await getDoc(docRef)
             .then(res=>{
-				console.log(res.data())
                 itemInput = props.input == "resumo" ? res.data().resumo : res.data().text
             }) 
 		setContent(itemInput)
+		props.handleState(itemInput)
     } 
 	return (
 		<JoditEditor
