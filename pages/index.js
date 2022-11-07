@@ -2,7 +2,7 @@ import { useEffect, useState, useRef }       from "react";
 import Head                                  from "next/head";
 import Header                                from "../public/components/Header";
 import NavBar                                from '../public/components/NavBar';
-import Card                                  from "../public/components/card";
+import Card                                  from "../public/components/Card";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import {  initializeApp }                    from "firebase/app";
 
