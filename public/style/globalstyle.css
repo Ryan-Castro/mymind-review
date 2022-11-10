@@ -11,7 +11,15 @@ body{
     width: 100vw;
     height: 100vh;
 }
+
 #main{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://i.pinimg.com/originals/73/f7/85/73f7853326ee1960d3a8b79080afc576.png");
+    background-position: center center;
+    background-size: cover;
+}
+#home{
     height: 100%;
     background-color: rgb(32, 32, 32);
 }

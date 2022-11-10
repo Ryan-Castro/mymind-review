@@ -6,6 +6,7 @@ import "../public/style/creat.css"
 import "../public/style/admin.css"
 import "../public/style/reading.css"
 import "../public/style/modal.css"
+import "../public/style/textBox.css"
 
 export default function MyApp({Component, pageProps}){
  return <Component {...pageProps}/>

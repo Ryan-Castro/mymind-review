@@ -1,0 +1,35 @@
+#textBox{
+    position: fixed;
+    width: 98vw;
+    height: 20vh;
+    bottom: 10px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.316);
+    display: flex;
+}
+
+#textBox img{
+    height: 20vh;
+    margin-right: 20px;
+}
+
+#textBox p{
+    color: white;
+    font-size: 35px;
+}
+
+#interactionsDialog{
+    position: absolute;
+    bottom: 10px;
+    right: 20px
+}
+
+#interactionsDialog input{
+    width: 150px;
+    height: 40px;
+    font-size: 25px;
+    border-radius: 10px;
+    margin-left: 10px;   
+}
