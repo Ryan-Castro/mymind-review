@@ -2,7 +2,7 @@ import { useRef } from "react"
 import { useEffect, useState} from "react"
 
 
-export default function TextBox(){
+export default function TextBox(props){
 
     const [numDialog, setNumDialog] = useState(0)
     const txtDialog = useRef()
@@ -13,6 +13,7 @@ export default function TextBox(){
         txtDialog.current.innerHTML = dialogos[numDialog]
         hideButton(2)
         hideButton(3)
+        hideButton(4)
     },[])
 
     const dialogos = [
@@ -37,6 +38,8 @@ export default function TextBox(){
         hideButton(1)
         showButton(2)
         showButton(3)
+        showButton(4)
+
         
     }
 
@@ -50,6 +53,7 @@ export default function TextBox(){
             hideButton(1)
             hideButton(0)
             showButton(3)
+            showButton(4)
         }
         if(imgArray[numDialog + 1]){
             imgDialog.current.src = imgArray[numDialog + 1]
@@ -63,6 +67,7 @@ export default function TextBox(){
         hideButton(2)
         hideButton(3)
         showButton(1)
+        
     }
 
     function goTo(){
@@ -77,6 +82,7 @@ export default function TextBox(){
         interactionsDialog.current.children[num].style.display = "inline-block"
     }
 
+
     return(
         <div id="textBox">
             <img src="https://i.pinimg.com/236x/93/2a/a1/932aa18b2a21d0190ee0f3695202cd96.jpg" ref={imgDialog}/>
@@ -86,6 +92,7 @@ export default function TextBox(){
                 <input type="button" value="Próximo" onClick={next}/>
                 <input type='button' value='Recomeçar' onClick={restart}/>
                 <input type='button' value='Ir para o site' onClick={goTo}/>
+                <input type='button' value='Categorias' onClick={props.showModal}/>
                 
             </div>
         </div>

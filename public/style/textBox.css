@@ -18,6 +18,7 @@
 #textBox p{
     color: white;
     font-size: 35px;
+    text-shadow: 1px 1px 1px black;
 }
 
 #interactionsDialog{

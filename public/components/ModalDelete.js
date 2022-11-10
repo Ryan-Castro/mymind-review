@@ -42,7 +42,7 @@ export default function ModalDelet(props){
                     <input type="button" value="Cancelar" id="cancel" className="btn" />
                     <input type="button" value="Apagar" id="delet" className="btn" onClick={delet}/>
                 </div>          
-                </div>
+            </div>
         </div>
 
     )

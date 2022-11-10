@@ -5,6 +5,7 @@ import NavBar                                from '../public/components/NavBar';
 import Card                                  from "../public/components/Card";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import {  initializeApp }                    from "firebase/app";
+import { useRouter } from "next/router";
 
 
 
@@ -25,6 +26,7 @@ export default function home(){
     let     [cards, setCards]   =                                     useState([])
     let itens = []
     let [barNumType, setBarNumType] = useState("livros")
+    let query = useRouter()
     
     let contentElement = useRef()
 
@@ -40,8 +42,7 @@ export default function home(){
 
     async function init(type){
         if(type != "livros"){
-             
-            type = type.target.id
+            type = type.target? type.target.id:type
             setBarNumType(type)
             
         }
@@ -55,8 +56,12 @@ export default function home(){
     }
 
     useEffect(()=>{
+        if(query.query.genre){
+            init(query.query.genre)
+        }else{
         init("livros")
-    },[])
+        }
+    },[query])
 
     return(
         <div id="home">

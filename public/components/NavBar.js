@@ -17,7 +17,7 @@ export default function navBar(props) {
                 <li onClick={props.handleUpdate} id="livros" key={0}>Livros</li>
                 <li onClick={props.handleUpdate} id="manhwa" key={1}>Manhwa</li>
                 <li onClick={props.handleUpdate} id="filmes" key={2}>Filmes</li>
-                <li onClick={props.handleUpdate} id="musica" key={3}>Musica</li>
+                <li onClick={props.handleUpdate} id="musicas" key={3}>Musica</li>
             </ul>
         </div>
     )

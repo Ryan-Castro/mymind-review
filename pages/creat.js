@@ -38,7 +38,7 @@ export default function Creat(){
     const [genres, setGenres] =                             useState([])
     const [defGenres, setDefGenres] =                       useState([])
     const [numGenresArrey, setNumArrey] = useState([])
-
+    let data = new Date()
 
     useEffect(()=>{
         if(query.id){
@@ -47,6 +47,7 @@ export default function Creat(){
             setNumArrey(query.numGenres.split(","))
             breakGenres(numGenresArrey.map(num=> optionsGenres[num]))
         }
+        
     },[query])
 
         
@@ -78,7 +79,8 @@ export default function Creat(){
                 text,
                 genres: genres !="" ? genres : genresitems,
                 numType,
-                defGenres
+                defGenres,
+                data
             }).then(()=>{Router.push('/admin')}) 
 
         }
