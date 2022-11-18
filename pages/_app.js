@@ -9,6 +9,7 @@ import "../public/style/modal.css"
 import "../public/style/textBox.css"
 import "../public/style/config.css"
 
+
 export default function MyApp({Component, pageProps}){
  return <Component {...pageProps}/>
 }
