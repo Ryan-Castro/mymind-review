@@ -1,7 +1,7 @@
 import Editor                                               from "../public/components/Editor"
 import { initializeApp }                                    from "firebase/app";
-import { getFirestore, setDoc, doc, getDoc}                        from "firebase/firestore";
-import { useEffect, useState }                                         from "react";
+import { getFirestore, setDoc, doc, getDoc}                 from "firebase/firestore";
+import { useEffect, useState }                              from "react";
 import React                                                from 'react'
 import dynamic                                              from 'next/dynamic';
 import Link                                                 from "next/link";
@@ -28,17 +28,17 @@ export default function Creat(){
         measurementId:                                      "G-3G8E71P1X5"
     };
 
-    const  {query}  = useRouter()
+    const  {query}  =                                       useRouter()
     const app   =                                           initializeApp(firebaseConfig);
     const db    =                                           getFirestore(app);
-    const [title, setTitle] = useState("")
-    const [resumo, setResumo] =                             useState("") 
-    const [text, setText] =                                 useState("") 
-    const [selected, setSelected] =                         useState([])
-    const [genres, setGenres] =                             useState([])
-    const [defGenres, setDefGenres] =                       useState([])
-    const [numGenresArrey, setNumArrey] = useState([])
-    let data = new Date()
+    const [title,           setTitle] =                     useState("")
+    const [resumo,          setResumo] =                    useState("") 
+    const [text,            setText] =                      useState("") 
+    const [selected,        setSelected] =                  useState([])
+    const [genres,          setGenres] =                    useState([])
+    const [defGenres,       setDefGenres] =                 useState([])
+    const [numGenresArrey,  setNumArrey] =                  useState([])
+    let data =                                              new Date()
 
     useEffect(()=>{
         if(query.id){

@@ -4,6 +4,7 @@ import { getFirestore, collection, getDocs }                                    
 import { initializeApp }                                                       from "firebase/app";
 import Card                                  from "../public/components/Card";
 import Link from "next/link";
+import { useRef } from "react";
 
 
 
@@ -24,6 +25,7 @@ export default function index(){
     const   db                  =                                     getFirestore(app);
     let     [cardsEdit, setCardsEdit]   =                             useState([])
     let     itens               =                                     []
+    let     background                  =                               useRef()
     async function update(genre){
         await getDocs(collection(db, genre))
                             .then((snapshot)=>{
@@ -48,8 +50,11 @@ export default function index(){
 
     useEffect(()=>{
         genres.map(genre=>update(genre))
+        getDocs(collection(db, "config")).then((snapshot)=>{
+            background.current.style.backgroundImage = `url(${snapshot.docs[0].data().background})`
+        })
     },[])
-
+    
     const [show, setShow] = useState(false)
 
 
@@ -65,7 +70,7 @@ export default function index(){
     }
 
     return(
-        <div id="main">
+        <div id="main" ref={background}>
             <TextBox showModal={showModal}></TextBox>
             {cardsEdit.map(card=><Card key={card[3]} h1={card[0]} resumo={card[1]} numType={card[4]}></Card>)}
             <div id="modal" onClick={hideModal} className={show? "": "hideModal"}>
