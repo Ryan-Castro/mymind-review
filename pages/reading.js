@@ -64,11 +64,11 @@ export default function reading(){
             <div id='reading'>
                 
                 <h1 dangerouslySetInnerHTML={{__html: query.id}}></h1>
-                <div>
+                <div className='readText'>
                     <h2>Sinopse</h2>
                     <p dangerouslySetInnerHTML={{__html: docSnap.resumo}}></p>
                 </div>
-                <div>
+                <div className='readText'>
                     <h2>Análise</h2>
                     <p dangerouslySetInnerHTML={{__html: docSnap.text}}></p>
                 </div>

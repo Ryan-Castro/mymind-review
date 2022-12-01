@@ -1,6 +1,6 @@
 #reading{
     padding: 50px 100px;
-    width: 90vw;
+    width: 100vw;
 }
 
 #reading h2{
@@ -11,8 +11,17 @@
 #reading p{
     text-indent: 15px;
 }
-#reading div{
+#reading div.readText{
     width: 100%;
-    box-shadow: 2px 2px 3px black;
+    height: 30vh;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.477);
     margin-bottom: 10px;
+    padding: 5px 20px;
+    background-color: rgba(255, 255, 255, 0.843);
+    transition: 1s;
+}
+
+#reading div.readText:hover{
+    height: 40vh;
+    overflow: auto;
 }
