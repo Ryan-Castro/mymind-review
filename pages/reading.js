@@ -52,15 +52,22 @@ export default function reading(){
 
 
     return(
-        <div id='reading'>
-            <h1 dangerouslySetInnerHTML={{__html: query.id}}></h1>
-            <div>
-                <h2>Sinopse</h2>
-                <p dangerouslySetInnerHTML={{__html: docSnap.resumo}}></p>
-            </div>
-            <div>
-                <h2>Análise</h2>
-                <p dangerouslySetInnerHTML={{__html: docSnap.text}}></p>
+        <div>
+            <Head>
+                <title>mymind-review</title>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5923285676279092" crossorigin="anonymous"></script>
+            </Head>
+            <div id='reading'>
+                
+                <h1 dangerouslySetInnerHTML={{__html: query.id}}></h1>
+                <div>
+                    <h2>Sinopse</h2>
+                    <p dangerouslySetInnerHTML={{__html: docSnap.resumo}}></p>
+                </div>
+                <div>
+                    <h2>Análise</h2>
+                    <p dangerouslySetInnerHTML={{__html: docSnap.text}}></p>
+                </div>
             </div>
         </div>
         
