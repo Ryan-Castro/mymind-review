@@ -38,6 +38,7 @@ export default function Creat(){
     const [genres,          setGenres] =                    useState([])
     const [defGenres,       setDefGenres] =                 useState([])
     const [numGenresArrey,  setNumArrey] =                  useState([])
+    const [backgroundImg, setBackgrondImg]=                 useState("")
     let data =                                              new Date()
 
     useEffect(()=>{
@@ -66,20 +67,17 @@ export default function Creat(){
   async function enviar(){
         let numType = selected.numType  
         let genresitems = numGenresArrey.map(num=>{return optionsGenres[num]})
-        console.log(numType)
-        console.log(title)
-        console.log(resumo)
-        console.log(text)
+        console.log(backgroundImg)
         if ((numType == "" && numType != 0) || title == ""  || resumo == "" || text == "" ){
             alert("Reveja os dados cadastrados")
         } else {
-          
-            await setDoc(doc(db, selected.value, title),{
+            await setDoc(doc(db, `${selected.value}`, `${title}`),{
                 resumo,
                 text,
                 genres: genres !="" ? genres : genresitems,
                 numType,
                 defGenres,
+                backgroundImg,
                 data
             }).then(()=>{Router.push('/admin')}) 
 
@@ -112,7 +110,7 @@ export default function Creat(){
                 
                 <button className="btnAdmin">
                     <Link href="/admin">
-                        <a>Admin</a>
+                        Admin
                     </Link>
                 </button>
 
@@ -140,12 +138,16 @@ export default function Creat(){
             </div>
 
             <div id="creatContainer">
+                <div id="creatContent">
                     <h1>Título</h1>
                     <input type='text' id="inputTitulo" onChange={(e)=>{setInputText(e)}} value={title} />
                     <h1>Sinopse / Resumo</h1>
                     <Editor handleState={setResumo} id={query.id} type={optionsTypes} input="resumo"></Editor>
                     <h1>Texto</h1>
                     <Editor handleState={setText} id={query.id} type={optionsTypes}></Editor>
+                    <h1>Imagem de fundo</h1>
+                    <input type='text' placeholder='Link da imagem de fundo' onInput={(i)=>{setBackgrondImg(i.target.value)}}/>
+                </div>
             </div>
 
         </div>

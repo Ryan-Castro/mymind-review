@@ -1,6 +1,14 @@
 #reading{
     padding: 50px 100px;
     width: 100vw;
+    background-size: cover;
+    height: 100vh;
+}
+
+#reading h1{
+    text-shadow: 0px 0px 2px white;
+    background-color: rgba(128, 128, 128, 0.515);
+    padding-left: 20px;
 }
 
 #reading h2{

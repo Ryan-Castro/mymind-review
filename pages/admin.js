@@ -62,7 +62,7 @@ export default function admin(){
             <div id="navbarAdmin">
                 <button className="btnAdmin">
                     <Link href="/">
-                        <a>Pagina Inicial</a>
+                        Pagina Inicial
                     </Link>
                 </button>
                 <Select 
@@ -73,7 +73,7 @@ export default function admin(){
                     />
                 <button className="btnAdmin">
                     <Link href="/creat">
-                        <a>Criar Resumo</a>
+                        Criar Resumo
                     </Link>
                 </button>
             </div>

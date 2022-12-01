@@ -1,7 +1,7 @@
 import { useRouter} from 'next/router'
 import { doc, getDoc, getFirestore} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Head                                  from "next/head";
 import Script from 'next/script'
 
@@ -22,6 +22,7 @@ export default function reading(){
     const   db                  =                                     getFirestore(app);
     const  {query}  = useRouter()
     const [docSnap, setDocSnap] = useState({resumo:""})
+    const page = useRef()
 
     const optionsTypes = [
         { value: 'livros', label: 'livros', numType:0},
@@ -38,10 +39,12 @@ export default function reading(){
         getDoc(docRef)
             .then(res=>{
                 if(res.data()){
-                setDocSnap(res.data());
-            } else {
-                alert("Não encontrado")
-            }
+                    setDocSnap(res.data());
+                    console.log(page.current.style)
+                    page.current.style.backgroundImage = `url(${res.data().backgroundImg})`
+                } else {
+                    alert("Não encontrado")
+                }
         })
             
     }
@@ -61,7 +64,7 @@ export default function reading(){
                 <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5923285676279092" crossorigin="anonymous"></Script>
                 <Script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></Script>
             </Head>
-            <div id='reading'>
+            <div id='reading' ref={page}>
                 
                 <h1 dangerouslySetInnerHTML={{__html: query.id}}></h1>
                 <div className='readText'>
