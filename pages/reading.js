@@ -3,9 +3,11 @@ import { doc, getDoc, getFirestore} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { useEffect, useState } from 'react';
 import Head                                  from "next/head";
+import Script from 'next/script'
 
 
 export default function reading(){
+
     const firebaseConfig = {
         apiKey:                                             "AIzaSyCSCby8YQNNIbzAuij_VOwQ5e2-Qf2HUck",
         authDomain:                                         "mymind-review.firebaseapp.com",
@@ -56,7 +58,8 @@ export default function reading(){
         <div>
             <Head>
                 <title>mymind-review</title>
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5923285676279092" crossorigin="anonymous"></script>
+                <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5923285676279092" crossorigin="anonymous"></Script>
+                <Script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></Script>
             </Head>
             <div id='reading'>
                 
@@ -69,6 +72,14 @@ export default function reading(){
                     <h2>Análise</h2>
                     <p dangerouslySetInnerHTML={{__html: docSnap.text}}></p>
                 </div>
+                <amp-ad width="100vw" height="320"
+                    type="adsense"
+                data-ad-client="ca-pub-5923285676279092"
+     data-ad-slot="8312970879"
+     data-auto-format="rspv"
+     data-full-width="">
+  <div overflow=""></div>
+</amp-ad>
             </div>
         </div>
         
