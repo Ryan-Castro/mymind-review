@@ -2,6 +2,7 @@ import { useRouter} from 'next/router'
 import { doc, getDoc, getFirestore} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { useEffect, useState } from 'react';
+import Head                                  from "next/head";
 
 
 export default function reading(){
