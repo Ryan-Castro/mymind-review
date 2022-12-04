@@ -27,9 +27,9 @@
     padding: 5px 20px;
     background-color: rgba(255, 255, 255, 0.843);
     transition: 1s;
+    overflow: auto;
 }
 
 #reading div.readText:hover{
     height: 40vh;
-    overflow: auto;
 }
