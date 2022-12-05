@@ -77,6 +77,8 @@ export default function index() {
         <>
             <Head>
                 <title>mymind-review</title>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5923285676279092"
+     crossorigin="anonymous"></script>
             </Head>
             <div id="main" ref={background}>
                 <TextBox showModal={showModal}></TextBox>

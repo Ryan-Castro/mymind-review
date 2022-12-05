@@ -63,6 +63,8 @@ export default function reading(){
                 <title>mymind-review</title>
                 <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5923285676279092" crossorigin="anonymous"></Script>
                 <Script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></Script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5923285676279092"
+     crossorigin="anonymous"></script>
             </Head>
             <div id='reading' ref={page}>
                 
