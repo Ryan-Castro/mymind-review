@@ -67,8 +67,6 @@ export default function home(){
         <div id="home">
             <Head>
                 <title>mymind-review</title>
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5923285676279092"
-     crossorigin="anonymous"></script>
             </Head>
             <Header show={show}></Header>
             <NavBar navBar={navBar} handleUpdate={init} barNum={barNumType}></NavBar>
