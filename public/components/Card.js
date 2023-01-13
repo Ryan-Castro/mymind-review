@@ -5,7 +5,7 @@ export default function Card(props){
     return(
         <div className="card">
             <h1>{props.h1}</h1>
-            <p dangerouslySetInnerHTML={{__html: props.resumo}}></p>
+            <div dangerouslySetInnerHTML={{__html: props.resumo}}></div>
             <a href={`./reading?id=`+props.h1+"&type="+props.numType}>Ler</a>
         </div>
         

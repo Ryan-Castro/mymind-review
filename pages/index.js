@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
-import TextBox from "../public/components/TextBox"
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
-import Card from "../public/components/Card";
-import Link from "next/link";
-import { useRef } from "react";
-import Head                                  from "next/head";
+import { useEffect, useState }                  from "react";
+import TextBox                                  from "../public/components/TextBox"
+import { getFirestore, collection, getDocs }    from "firebase/firestore";
+import { initializeApp }                        from "firebase/app";
+import Card                                     from "../public/components/Card";
+import Link                                     from "next/link";
+import { useRef }                               from "react";
+import Head                                     from "next/head";
 
+export async function getStaticProps(){
 
-
-
-
-
-
-export default function index() {
     const firebaseConfig = {
         apiKey: "AIzaSyCSCby8YQNNIbzAuij_VOwQ5e2-Qf2HUck",
         authDomain: "mymind-review.firebaseapp.com",
@@ -24,12 +19,17 @@ export default function index() {
         measurementId: "G-3G8E71P1X5"
     };
 
-    let genres = ["livros", "manhwa", "filmes", "musicas"]
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    let [cardsEdit, setCardsEdit] = useState([])
     let itens = []
-    let background = useRef()
+    let genres = ["livros", "manhwa", "filmes", "musicas"]
+    let background = ''
+    
+    genres.map((genre) => update(genre))
+    await getDocs(collection(db, "config")).then((snapshot) => {
+        background = snapshot.docs[0].data().background
+    })
+    
     async function update(genre) {
         await getDocs(collection(db, genre))
             .then((snapshot) => {
@@ -46,19 +46,21 @@ export default function index() {
                 })
             })
         itens.sort((a, b) => { return a[6] < b[6] })
-        setCardsEdit([itens[0], itens[1]])
-
     }
 
+    return{
+        props: {
+            background,
+            itens,
+            genres
+        },
+        revalidate: 600
+    }
+}
 
+const Index = (props) => {
 
-    useEffect(() => {
-        genres.map(genre => update(genre))
-        getDocs(collection(db, "config")).then((snapshot) => {
-            background.current.style.backgroundImage = `url(${snapshot.docs[0].data().background})`
-        })
-    }, [])
-
+    let background = useRef()
     const [show, setShow] = useState(false)
 
 
@@ -72,23 +74,27 @@ export default function index() {
             setShow(false)
         }
     }
-
+    useEffect(()=>{
+        background.current.style.backgroundImage = `url(${props.background})`
+    },[])
     return (
-        <>
+         <>
             <Head>
                 <title>mymind-review</title>
             </Head>
             <div id="main" ref={background}>
                 <TextBox showModal={showModal}></TextBox>
-                {cardsEdit.map(card => <Card key={card[3]} h1={card[0]} resumo={card[1]} numType={card[4]}></Card>)}
+                {props.itens.map((card, i) => <Card key={i} h1={card[0]} resumo={card[1]} numType={card[4]}></Card>)}
                 <div id="modal" onClick={hideModal} className={show ? "" : "hideModal"}>
                     <div id="contentModalGenres">
                         <ul>
-                            {genres.map((genre, i) => <Link href={`/home?genre=${genre}`}><li key={i}>{genre}</li></Link>)}
+                            {props.genres.map((genre, i) => <Link href={`/home?genre=${genre}`} key={i}><li key={i}>{genre}</li></Link>)}
                         </ul>
                     </div>
                 </div>
             </div>
-        </>
+        </> 
     )
 }
+
+export default Index
