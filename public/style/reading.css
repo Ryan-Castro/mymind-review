@@ -3,6 +3,7 @@
     width: 100vw;
     background-size: cover;
     height: 100vh;
+    overflow: auto;
 }
 
 #reading h1{
@@ -25,11 +26,23 @@
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.477);
     margin-bottom: 10px;
     padding: 5px 20px;
-    background-color: rgba(255, 255, 255, 0.843);
-    transition: 1s;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: .5s;
     overflow: auto;
 }
 
 #reading div.readText:hover{
     height: 40vh;
+}
+
+@media (max-width: 1000px){
+    #reading{
+        padding: 20px;
+    }
+    #reading div.readText{
+        height: 50vh;
+    }
+    #reading div.readText:hover{
+        height: 60vh;
+    }
 }
